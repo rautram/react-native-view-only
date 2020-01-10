@@ -6,15 +6,18 @@ import {
   NativeModules,
   TouchableOpacity,
   ToolbarAndroid,
+  requireNativeComponent,
 } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 
 const ActivityStarter = NativeModules.ActivityStarter;
 
+const SharedElement = requireNativeComponent('SharedElement');
+
 class App extends React.Component {
   start = () => {
-    ActivityStarter.startActivity();
+    ActivityStarter.startShareElement();
   };
   render() {
     return (
@@ -23,8 +26,9 @@ class App extends React.Component {
           <Text>This is fragment not a custom View</Text>
           <Text>{this.props.home.home}</Text>
         </RectButton>
+        <SharedElement style={{flex: 1}}></SharedElement>
         <View style={styles.button}>
-          <Text style={styles.hello}>Hello</Text>
+          <Text>Hello</Text>
         </View>
       </View>
     );

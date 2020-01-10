@@ -1,13 +1,20 @@
 import React from 'react';
-import {Text, View, StyleSheet, ToolbarAndroid} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ToolbarAndroid,
+  requireNativeComponent,
+} from 'react-native';
 import {connect} from 'react-redux';
+
+const SharedElementDetail = requireNativeComponent('SharedElementDetail');
 
 class SecondScreen extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Text>This is the second View</Text>
-        <Text>{this.props.home.home}</Text>
+        <SharedElementDetail style={{flex: 1}} />
       </View>
     );
   }
