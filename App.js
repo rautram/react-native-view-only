@@ -4,61 +4,42 @@ import {
   View,
   StyleSheet,
   NativeModules,
+  DeviceEventEmitter,
   TouchableOpacity,
-  ToolbarAndroid,
-  requireNativeComponent,
 } from 'react-native';
-import {RectButton} from 'react-native-gesture-handler';
-import {connect} from 'react-redux';
 
-const ActivityStarter = NativeModules.ActivityStarter;
-
-const SharedElement = requireNativeComponent('SharedElement');
+const FirebaseMessaging = NativeModules.FirebaseMessaging;
 
 class App extends React.Component {
-  start = () => {
-    ActivityStarter.startShareElement();
+  constructor(props) {
+    super(props);
+    this.listener = DeviceEventEmitter.addListener('onReceived', event => {
+      const data = event;
+      console.log('the datas are ', JSON.parse(data.data));
+      alert(JSON.stringify(data));
+    });
+  }
+  componentDidMount() {}
+  getFirebaseToken = () => {
+    FirebaseMessaging.getFirebaseToken().then(token => {
+      alert(token);
+      console.log(token);
+    });
   };
+  componentWillUnmount() {
+    this.listener.remove();
+  }
   render() {
     return (
       <View style={{flex: 1}}>
-        <RectButton style={{flex: 1}} onPress={() => this.start()}>
-          <Text>This is fragment not a custom View</Text>
-          <Text>{this.props.home.home}</Text>
-        </RectButton>
-        <SharedElement style={{flex: 1}}></SharedElement>
-        <View style={styles.button}>
+        <TouchableOpacity onPress={() => this.getFirebaseToken()}>
           <Text>Hello</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
-mapStateToProps = ({home}) => {
-  return {home};
-};
+export default App;
 
-export default connect(mapStateToProps, null)(App);
-
-const styles = StyleSheet.create({
-  button: {
-    height: 60,
-    margin: 15,
-    backgroundColor: 'blue',
-    elevation: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  hello: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  toolbar: {
-    backgroundColor: '#2196F3',
-    height: 56,
-    alignSelf: 'stretch',
-    textAlign: 'center',
-  },
-});
+const styles = StyleSheet.create({});
