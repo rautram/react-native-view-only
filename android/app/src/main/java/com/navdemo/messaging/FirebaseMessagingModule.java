@@ -1,5 +1,8 @@
 package com.navdemo.messaging;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -67,11 +72,31 @@ public class FirebaseMessagingModule extends ReactContextBaseJavaModule {
                 });
     }
 
+    /**--- This method is called from MainActivity when app is in Killed mode **/
+    @ReactMethod
+    public void getData(Promise promise)
+    {
+        SharedPreferences sharedPreferences = getReactApplicationContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        WritableMap writableMap = Arguments.createMap();
+        String data =  sharedPreferences.getString("data", null);
+        writableMap.putString("data",data);
+        promise.resolve(writableMap);
+        // sendDataToReact(writableMap);
+       // sharedPreferences.edit().clear().commit();
+
+    }
+
+    @ReactMethod
+    public void clearPreference()
+    {
+        SharedPreferences sharedPreferences = getReactApplicationContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+    }
+
+
 
     public void sendDataToReact(WritableMap data)
     {
-
-
         getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("onReceived", data);

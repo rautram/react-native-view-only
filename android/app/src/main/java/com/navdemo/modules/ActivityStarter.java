@@ -15,6 +15,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.navdemo.R;
+import com.navdemo.Video;
 import com.navdemo.fragment.SecondActivity;
 
 
@@ -37,9 +38,17 @@ public class ActivityStarter extends ReactContextBaseJavaModule {
     public void startActivity()
     {
         AppCompatActivity activity = (AppCompatActivity) getCurrentActivity();
-        Intent intent = new Intent(activity, SecondActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        activity.startActivity(intent);
+        Intent intent = new Intent(activity, Video.class);
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
+            }
+        });
+
+
     }
 
     @ReactMethod

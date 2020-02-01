@@ -35,7 +35,6 @@ public class JanataMessagingService extends FirebaseMessagingService {
         WritableMap writableMap = Arguments.createMap();
         writableMap.putString("title", title);
         writableMap.putString("body",body);
-
         if(data != null)
         {
             for (Map.Entry<String, String> e : data
@@ -84,7 +83,6 @@ public class JanataMessagingService extends FirebaseMessagingService {
 
         if(!isInBackground) {
             System.out.println("I am called not in background");
-
              FirebaseMessagingModule.getInstance().sendDataToReact(data);
         }
         else {

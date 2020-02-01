@@ -197,6 +197,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.android.exoplayer:exoplayer:2.10.5'
 }
 
 // Run this once to be able to run the application with BUCK
