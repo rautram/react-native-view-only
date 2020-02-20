@@ -6,6 +6,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.navdemo.VideoViewManager;
 import com.navdemo.messaging.FirebaseMessagingModule;
 import com.navdemo.views.SharedElementDetailManager;
 import com.navdemo.views.SharedElementViewManager;
@@ -20,6 +21,7 @@ public class ActivityPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
+                new VideoViewManager(),
             new SharedElementViewManager(),
                 new SharedElementDetailManager()
         );

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -15,10 +16,7 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.dash.DashMediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
@@ -68,6 +66,7 @@ public class Video extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+        Toast.makeText(this, "on pause called",Toast.LENGTH_LONG).show();
         if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
@@ -76,6 +75,7 @@ public class Video extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+        Toast.makeText(this, "on stop called",Toast.LENGTH_LONG).show();
         if (Util.SDK_INT > 23) {
             releasePlayer();
         }

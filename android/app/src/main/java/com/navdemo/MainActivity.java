@@ -83,7 +83,8 @@ public class MainActivity extends ReactActivity implements DefaultHardwareBackBt
 
   @Override
   public void invokeDefaultOnBackPressed() {
-    super.onBackPressed();
+
+  //  super.onBackPressed();
   }
 
   /**

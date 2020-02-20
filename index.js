@@ -16,6 +16,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 import reducers from './src/reducers';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 
 const middleware = [thunk, logger];
 
@@ -30,7 +31,7 @@ function ReduxProvider(Component) {
 }
 
 AppRegistry.registerComponent('example', () =>
-  ReduxProvider(gestureHandlerRootHOC(App)),
+  ReduxProvider(gestureHandlerRootHOC(WelcomeScreen)),
 );
 
 AppRegistry.registerComponent('second', () =>

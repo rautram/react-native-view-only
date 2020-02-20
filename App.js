@@ -5,13 +5,14 @@ import {
   StyleSheet,
   NativeModules,
   DeviceEventEmitter,
-  TouchableOpacity,
-  AppState,
+  requireNativeComponent,
   Button,
 } from 'react-native';
 
 const FirebaseMessaging = NativeModules.FirebaseMessaging;
 const ActivityStarter = NativeModules.ActivityStarter;
+
+const VideoView = requireNativeComponent('VideoView');
 
 class App extends React.Component {
   constructor(props) {
@@ -41,7 +42,18 @@ class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Button title="Click Me" onPress={() => this.goToVideo()}></Button>
+        <View
+          style={{
+            height: 300,
+            width: 300,
+            borderRadius: 150,
+            backgroundColor: 'rgba(0,0,0,0.3)',
+          }}>
+          <VideoView
+            style={{height: 300, width: 300, zIndex: -1, overflow: 'hidden'}}
+          />
+        </View>
+        <Button title="Go to Video" onPress={() => this.goToVideo()} />
       </View>
     );
   }
